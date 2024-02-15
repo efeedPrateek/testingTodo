@@ -29,27 +29,27 @@ export class TodoTaskController {
   @UseGuards(AuthCustomerGuard, RolesGuard)
   @Post('/')
   async create(@Req() req, @Body() payload): Promise<User> {
-    return this.todoTaskService.create(payload, req.user.id);
+    return this.todoTaskService.create(payload, req.user._id);
   }
 
   @Roles(UserRole.CUSTOMER)
   @UseGuards(AuthCustomerGuard, RolesGuard)
   @Get('/')
   async get(@Req() req, @Query() payload): Promise<User> {
-    return this.todoTaskService.find(payload, req.user.id);
+    return this.todoTaskService.find(payload, req.user._id);
   }
 
   @Roles(UserRole.CUSTOMER)
   @UseGuards(AuthCustomerGuard, RolesGuard)
   @Post('/updateTask')
   async update(@Req() req, @Body() payload): Promise<User> {
-    return this.todoTaskService.updateTask(payload, req.user.id);
+    return this.todoTaskService.updateTask(payload, req.user._id);
   }
 
   @Roles(UserRole.CUSTOMER)
   @UseGuards(AuthCustomerGuard, RolesGuard)
   @Post('/deleteTask')
   async delete(@Req() req, @Body() payload): Promise<User> {
-    return this.todoTaskService.deleteTask(payload, req.user.id);
+    return this.todoTaskService.deleteTask(payload, req.user._id);
   }
 }

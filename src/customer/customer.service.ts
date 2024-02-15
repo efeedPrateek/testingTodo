@@ -18,23 +18,27 @@ export class CustomerService {
   ) {}
 
   async create(payload: { user; otp?: string }): Promise<Customer> {
-    const findCustomer = await this.customerModel.findOne({
-      mobile: payload.user.mobile,
-    });
-    if (findCustomer) {
-      throw new Error('Cannot add duplicate Mobile Number!!');
+    try {
+      const findCustomer = await this.customerModel.findOne({
+        mobile: payload.user.mobile,
+      });
+      if (findCustomer) {
+        throw new Error('Cannot add duplicate Mobile Number!!');
+      }
+      const customer = await new this.customerModel(payload.user);
+
+      const newUser = await this.userService.create({
+        mobile: payload.user.mobile,
+        otp: payload.otp,
+        name: payload.user.firstName,
+        role: UserRole.CUSTOMER,
+      });
+
+      return customer.save();
+      // return;
+    } catch (err) {
+      return err.message;
     }
-    const customer = await new this.customerModel(payload.user);
-
-    const newUser = await this.userService.create({
-      mobile: payload.user.mobile,
-      otp: payload.otp,
-      name: payload.user.firstName,
-      role: UserRole.CUSTOMER,
-    });
-
-    return customer.save();
-    // return;
   }
 
   async findOne(filterQuery: FilterQuery<CustomerDocument>): Promise<any> {
