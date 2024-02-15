@@ -19,6 +19,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     MongooseModule.forRoot(
       process.env.ENV === 'local'
         ? 'mongodb://localhost:27017/efeed'

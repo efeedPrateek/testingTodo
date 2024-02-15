@@ -5,13 +5,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from '../user/user.module';
 import { HttpModule } from '@nestjs/axios';
 import { Admin, AdminSchema } from './admin.schema';
+import { SmsService } from 'src/service/sendSms';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Admin.name, schema: AdminSchema }]),
     forwardRef(() => UserModule),
     HttpModule,
   ],
-  providers: [AdminService],
+  providers: [AdminService, SmsService],
   controllers: [AdminController],
   exports: [AdminService],
 })
