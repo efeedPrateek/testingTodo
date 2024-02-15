@@ -31,7 +31,6 @@ import { UserService } from '../user/user.service';
     AuthCustomerStrategy,
     AuthAdminStrategy,
     AuthAdminService,
-
     UserService,
   ],
   controllers: [AppCustomerController, AuthAdminController],

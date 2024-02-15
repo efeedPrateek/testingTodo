@@ -16,6 +16,7 @@ import { TodoTaskModule } from './todo-task/todo-task.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     CustomerModule,
     UserModule,
     TodoTaskModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -16,8 +16,6 @@ export class AdminController {
     private readonly userService: UserService,
   ) {}
 
-  @Roles(UserRole.ADMIN)
-  @UseGuards(AuthAdminGuard, RolesGuard)
   @Post('/')
   async create(@Body() payload: AddAdminDTO) {
     const customer = await this.adminService.create({ user: payload, otp: '' });
